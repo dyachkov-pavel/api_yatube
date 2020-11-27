@@ -4,17 +4,17 @@ from .models import Post, Comment
 
 class PostSerializer(serializers.ModelSerializer):
 
-    author = serializers.ReadOnlyField(source='author.username')
+    author = serializers.PrimaryKeyRelatedField(read_only=True, source='author.username')
 
     class Meta:
         model = Post
-        fields = ('id', 'text', 'author', 'image', 'pub_date',)
+        fields = '__all__'
 
 
 class CommentSerializer(serializers.ModelSerializer):
 
-    author = serializers.ReadOnlyField(source='author.username')
+    author = serializers.PrimaryKeyRelatedField(read_only=True, source='author.username')
 
     class Meta:
         model = Comment
-        fields = ('id', 'author', 'post', 'text', 'created',)
+        fields = '__all__'
