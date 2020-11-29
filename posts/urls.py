@@ -6,10 +6,9 @@ from rest_framework.authtoken import views
 
 router_posts_v1 = DefaultRouter()
 router_posts_v1.register('posts', PostViewSet, basename='post-list')
-router_posts_v1.register('comments', CommentViewSet, basename='comment-list')
+router_posts_v1.register(r'posts/(?P<post_id>.+)/comments', CommentViewSet, basename='comment-list')
 
 urlpatterns = [
     path('v1/', include(router_posts_v1.urls)),
-    path('v1/posts/<int:post_id>/', include(router_posts_v1.urls)),
     path('v1/api-token-auth/', views.obtain_auth_token),
 ]
